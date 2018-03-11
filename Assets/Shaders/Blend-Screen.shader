@@ -1,4 +1,4 @@
-﻿Shader "Custom/Overcoating" {
+﻿Shader "Blend/Screen" {
     Properties {
         [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
         _CoatingTex ("Coating Texture", 2D) = "white" {}
@@ -51,8 +51,8 @@
             	float4 baseColor = tex2D(_MainTex, output.uv) * output.color;
             	float4 mixColor = tex2D(_CoatingTex, output.uv) * output.color;
 
-            	//通常合成
-                return mixColor * _alpha + baseColor * (1-_alpha);
+            	//加算合成
+                return mixColor * (1-baseColor) + baseColor * 1;
             }
         ENDCG
         }
